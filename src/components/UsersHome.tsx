@@ -4,22 +4,35 @@ import { useUsers } from "../hooks/useUsers";
 import UserFormModal from "./UserFormModal";
 import UserList from "./UserList";
 import ReactModal from 'react-modal';
+import ConfirmModal from "./shared/ConfirmModal";
 
 ReactModal.setAppElement("#root");
 
 const UsersHome: React.FC = () => {
   const { users, loading, error, createUser, updateUser, deleteUser } = useUsers();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmOpen, setIsConfirmOpen] = useState<boolean>(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
+  const [deletingUser, setDeletingUser] = useState<number | null>(null);
 
   const handleOpenModal = (user?: User) => {
     setEditingUser(user || null);
     setIsModalOpen(true);
   };
 
+  const handleOpenConfirmModal = (id: number) => {
+    setDeletingUser(id || null)
+    setIsConfirmOpen(true);
+  };
+
   const handleCloseModal = () => {
     setEditingUser(null);
     setIsModalOpen(false);
+  };
+
+  const handleCloseConfirmModal = () => {
+    setEditingUser(null);
+    setIsConfirmOpen(false);
   };
 
   const handleSaveUser = (user: Partial<User>) => {
@@ -31,6 +44,13 @@ const UsersHome: React.FC = () => {
     handleCloseModal();
   };
 
+  const handleDeleteUser = () => {
+    if (deletingUser) {
+      deleteUser(deletingUser);
+    }
+    handleCloseConfirmModal();
+  };
+
   return (
     <div className="p-4 space-y-4">
       <h1 className="text-xl font-bold">User Management</h1>
@@ -38,7 +58,7 @@ const UsersHome: React.FC = () => {
 
       {loading && <p>Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
-      <UserList users={users} onEdit={handleOpenModal} onDelete={deleteUser} />
+      <UserList users={users} onEdit={handleOpenModal} onDelete={handleOpenConfirmModal} />
 
       <ReactModal
         isOpen={isModalOpen}
@@ -63,6 +83,13 @@ const UsersHome: React.FC = () => {
           onSave={handleSaveUser}
         />
       </ReactModal>
+
+      <ConfirmModal
+        isOpen={isConfirmOpen}
+        onClose={() => setIsConfirmOpen(false)}
+        onConfirm={() => handleDeleteUser()}
+        message="¿Estás seguro de que deseas eliminar este usuario?"
+      />
     </div>
   );
 };

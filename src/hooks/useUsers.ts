@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { User, UserApiResponse, mapUserFromApi } from "../models/User";
+import { User, UserApiResponse, Users, mapUserFromApi } from "../models/User";
 import { API_URL } from "../config/contants";
 import axios from "axios";
 
@@ -14,8 +14,8 @@ export const useUsers = () => {
         setLoading(true);
         setError(null);
         try {
-          const response = await axios.get<UserApiResponse[]>(API_URL);
-          const mappedUsers = response.data.map(mapUserFromApi);
+          const response = await axios.get<UserApiResponse>(API_URL);
+          const mappedUsers = response.data.users.map(mapUserFromApi);
           setUsers(mappedUsers);
         } catch (err) {
           setError("Failed to fetch users.");
@@ -30,21 +30,26 @@ export const useUsers = () => {
     const createUser = async (newUser: Partial<User>) => {
       setLoading(true);
       try {
-        const response = await axios.post<UserApiResponse>(API_URL, newUser);
-        setUsers([...users, mapUserFromApi(response.data)]);
+        const response = await axios.post<Users>(`${API_URL}/add`, newUser);
+        const newUserMapped = response.data ? mapUserFromApi(response.data) : null;
+        if (newUserMapped) {
+          setUsers([newUserMapped, ...users]);
+        }
       } catch (err) {
         setError("Error creating user");
-      }
-      finally {
+      } finally {
         setLoading(false);
       }
     };
   
     const updateUser = async (id: number, updatedUser: Partial<User>) => {
-    setLoading(true);
+      setLoading(true);
       try {
-        const response = await axios.put<UserApiResponse>(`${API_URL}/${id}`, updatedUser);
-        setUsers(users.map(user => (user.id === id ? mapUserFromApi(response.data) : user)));
+        const response = await axios.put<Users>(`${API_URL}/${id}`, updatedUser);
+        const updatedUserMapped = response.data ? mapUserFromApi(response.data) : null;
+        if (updatedUserMapped) {
+          setUsers(users.map(user => (user.id === id ? updatedUserMapped : user)));
+        }
       } catch (err) {
         setError("Error updating user");
       } finally {
