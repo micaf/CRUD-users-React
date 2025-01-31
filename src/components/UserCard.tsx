@@ -1,7 +1,13 @@
 import React from "react";
 import { User } from "../models/User";
 
-const UserCard: React.FC<{ user: User; onEdit: () => void; onDelete: () => void }> = ({ user, onEdit, onDelete }) => (
+type UserCardProps = {
+  user: User;
+  onEdit: () => void;
+  onDelete: () => void
+};
+
+const UserCard: React.FC<UserCardProps> = ({ user, onEdit, onDelete }) => (
   <div className="card border p-4 flex justify-between items-center">
     <div>
       <p className="font-bold">{user.username}</p>

@@ -1,22 +1,26 @@
 import React from "react";
-import { User } from "../models/User";
 import UserCard from "./UserCard";
+import ConfirmModal from "../shared/components/ConfirmModal";
+import { useConfirmModal } from "../hooks/useConfirmModal";
+import { useUsers } from "../context/UsersContext";
+import { useUserFormNavigation } from "../hooks/useUserFormNavigation";
 
-type UserListProps = {
-    users: User[];
-    onEdit: (user: User) => void;
-    onDelete: (id: number) => void;
-  };
-  
-  const UserList: React.FC<UserListProps> = ({ users, onEdit, onDelete }) => {
-    return (
+const UserList: React.FC = () => {
+  const { users, removeUser } = useUsers();
+  const { openUserForm } = useUserFormNavigation();
+  const { isConfirmOpen, closeConfirmModal, handleDeleteUser } = useConfirmModal();
+
+  return (
+    <>
       <div className="user-list space-y-4">
         {users.map(user => (
-          <UserCard key={user.id} user={user} onEdit={() => onEdit(user)} onDelete={() => onDelete(user.id)} />
+          <UserCard key={user.id} user={user} onEdit={() => openUserForm(user)} onDelete={() => removeUser(user.id)} />
         ))}
       </div>
-    );
-  };
-  
-  export default UserList;
-  
+
+      <ConfirmModal isOpen={isConfirmOpen} onClose={closeConfirmModal} onConfirm={handleDeleteUser} message="Are you sure you want to delete this user?" title="Delete User" />
+    </>
+  );
+};
+
+export default UserList;
