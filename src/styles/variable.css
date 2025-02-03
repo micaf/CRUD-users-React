@@ -1,0 +1,28 @@
+:root {
+    --primary-color: #fffcfc; 
+    --secondary-color: #fff9e8;
+    --accent-color: #41939d; 
+    --accent-hover: #69929a;
+    --danger-color: #ff8a65; 
+    --danger-hover: #eb592c;
+    --success-color: #8bc34a; 
+    --success-hover: #689f38;
+    --success-hover: #1b5e20;
+    --text-color: #FFFFFF;
+    --text-dark: #333333; 
+    --border-color: #DDDDDD; 
+  
+  
+    --card-border-radius: 12px;
+    --button-border-radius: 8px;
+    --spacing-small: 8px;
+    --spacing-medium: 16px;
+    --spacing-large: 24px;
+  
+
+    --font-size-small: 14px;
+    --font-size-medium: 16px;
+    --font-size-large: 20px;
+  }
+  
+  
