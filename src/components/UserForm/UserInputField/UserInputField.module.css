@@ -1,0 +1,23 @@
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .inputError {
+    border-color: red;
+    background: #ffe6e6;
+  }
+  
+  .errorMessage {
+    color: red;
+    font-size: 14px;
+  }
+  

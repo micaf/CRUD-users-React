@@ -1,0 +1,61 @@
+.userCard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: var(--text-color);
+  border-radius: var(--card-border-radius);
+  padding: var(--spacing-medium);
+  margin-bottom: var(--spacing-small);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.userCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.userCardInfo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background-color: #f3f3f3;
+}
+
+.userAvatar {
+  width: 65px;
+  height: 65px;
+  margin-left: 5px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 10px;
+  background-color: var(--text-color);
+  border: solid 4px #c4c4c4;
+}
+
+.userInfo {
+  flex-grow: 1;
+  margin-bottom: var(--spacing-medium);
+  width: 100%;
+}
+
+.userInfo h3 {
+  font-size: var(--font-size-large);
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.userInfo p {
+  font-size: var(--font-size-small);
+  color: #6C757D;
+  margin: 4px 0;
+}
+
+.userActions {
+  display: flex;
+  gap: var(--spacing-small);
+  width: 100%;
+  justify-content: flex-end;
+  margin-top: 10px;
+}

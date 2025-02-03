@@ -9,7 +9,6 @@ export const isFormValid = (
     Object.values(errors).every(error => !error) &&
     Boolean(formData.username?.trim()) &&
     Boolean(formData.email?.trim()) &&
-    Boolean(formData.phone?.trim()) &&
-    Boolean(formData.city?.trim())
+    Boolean(formData.phone?.trim())
   );
 };

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { User } from "../models/User";
 import { validateField } from "../shared/utils/validateFields";
-import UserForm from "../components/UserForm";
+import UserForm from "../components/UserForm/UserForm";
 import { useUsers } from "../context/UsersContext"; 
 import { isFormValid } from "../hooks/useUserFormValidation";
 
@@ -13,15 +13,17 @@ const UserFormPage: React.FC = () => {
 
   const [formData, setFormData] = useState<Partial<User>>({});
   const [errors, setErrors] = useState<{ [key in "username" | "email" | "phone" | "city"]?: string }>({});
-  const [formIsValid, setFormIsValid] = useState<boolean>(true);
+  const [formIsValid, setFormIsValid] = useState<boolean>(false);
 
   useEffect(() => {
-    if (id && users.length > 0) { // 🔥 Asegurar que `users` ya está cargado
+    if (id && users.length > 0) { 
       const userToEdit = users.find((u) => u.id === parseInt(id));
       if (userToEdit) {
         setFormData(userToEdit);
-      }
+       
+      }   
     }
+    setFormIsValid(isFormValid(formData, errors));
   }, [id, users]);
 
   const handleChange = (field: "username" | "email" | "phone" | "city", value: string) => {

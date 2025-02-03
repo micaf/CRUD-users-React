@@ -77,14 +77,12 @@ export interface Hair {
   type: string;
 }
 
-export type User = Pick<Users, "id" | "username" | "email" | "phone"> & {
-  city: Address["city"];
-};
+export type User = Pick<Users, "id" | "username" | "email" | "phone" | "image"> 
 
 export const mapUserFromApi = (apiUser: Users): User => ({
   id: apiUser.id,
   username: apiUser.username,
   email: apiUser.email,
   phone: apiUser.phone,
-  city: apiUser.address.city,
+  image: apiUser.image
 });

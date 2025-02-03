@@ -1,0 +1,19 @@
+.userListContainer {
+    padding: var(--spacing-large);
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.btnAddUser {
+    width: 10%;
+    align-self: flex-end;
+    margin-bottom: 20px;
+}
+
+.userList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-medium);
+
+}

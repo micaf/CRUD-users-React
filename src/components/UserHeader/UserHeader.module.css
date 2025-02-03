@@ -1,0 +1,15 @@
+.header {
+    background-color: #504b4b;
+    margin: 0;
+    padding: 15px 0px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.iconUserManagment {
+    font-size: 25px;
+    margin: 0px 10px;
+}
+

@@ -4,12 +4,14 @@ import './App.css'
 import UsersHomePage from "./pages/UsersHomePage";
 import UserFormPage from "./pages/UserFormPage";
 import { UsersProvider } from "./context/UsersContext";
+import UsersHeader from "./components/UserHeader/UserHeader";
 
 function App() {
 
   return (
     <Router>
       <UsersProvider>
+      <UsersHeader />
         <Routes>
           <Route path="/" element={<Navigate to="/users" replace />} />
           <Route path="/users" element={<UsersHomePage />} />
