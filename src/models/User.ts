@@ -1,10 +1,12 @@
-export interface UserApiResponse {
+export interface UserApiResponse extends Pagination {
   users: Users[];
+}
+
+export interface Pagination {
   total: number;
   skip: number;
   limit: number;
 }
-
 export interface Users {
   id: number;
   firstName: string;

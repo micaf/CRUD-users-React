@@ -5,10 +5,18 @@
     display: flex;
     flex-direction: column;
 }
+
+.userActions {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .btnAddUser {
     width: 10%;
-    align-self: flex-end;
-    margin-bottom: 20px;
+    height: 40px;
 }
 
 .userList {
@@ -16,4 +24,30 @@
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--spacing-medium);
 
+}
+
+.paginationWrapper{
+   align-self: center; 
+}
+
+.pageItem {
+    display: inline-block;
+    margin: 0 var(--spacing-small);
+}
+
+.pageLink {
+    padding: var(--spacing-small) var(--spacing-medium);
+    background-color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    color: var(--accent-color);
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: var(--button-border-radius);
+    transition: background-color 0.2s, border-color 0.2s;
+    font-size: var(--font-size-medium);
+}
+
+.pageLink:hover {
+    background-color: var(--accent-hover);
+    color: var(--text-color);
 }
